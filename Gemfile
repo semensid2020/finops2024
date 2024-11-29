@@ -53,6 +53,7 @@ gem 'sassc-rails'
 gem 'acts_as_paranoid'
 gem 'annotate'
 gem 'devise'
+gem 'draper'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -61,6 +62,7 @@ end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem 'bullet'
   gem 'web-console'
 
   gem 'rubocop', require: false

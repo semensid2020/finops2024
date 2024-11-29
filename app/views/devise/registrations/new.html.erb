@@ -7,6 +7,16 @@
   <div class="d-flex flex-column justify-content-center align-items-center">
 
   <div class="form-group mb-3 w-50">
+    <%= f.label :first_name, class: "form-label" %><br />
+    <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group mb-3 w-50">
+    <%= f.label :last_name, class: "form-label" %><br />
+    <%= f.text_field :last_name, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group mb-3 w-50">
     <%= f.label :email, class: "form-label" %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
   </div>

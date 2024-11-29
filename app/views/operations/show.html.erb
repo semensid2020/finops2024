@@ -1,0 +1,53 @@
+<div class="container container-widest">
+<%= link_to 'Back to all operations', operations_path, class: 'btn btn-primary btn-lg mb-3' %>
+<h1 class="mb-4">Operation '<%= @operation.id %>'</h1>
+</div>
+<div class="container container-widest">
+  <table class="table table-bordered table-striped mb-0" style="text-align: center">
+      <thead>
+          <tr>
+            <th>ID</th>
+            <th>Sender</th>
+            <th>Sender Account</th>
+            <th>Recipient</th>
+            <th>Recipient Account</th>
+            <th>Currency</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>State</th>
+            <th>Planned_at</th>
+            <th>Actions</th>
+          </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><%= @operation.id %></td>
+          <td>
+            <%= link_to "#{@operation.sender.owner.full_name}", user_account_path(@operation.sender.owner)%>
+          </td>
+          <td>
+            <%= link_to "Account ##{@operation.sender_id}", user_account_path(@operation.sender)%>
+          </td>
+          <td>
+            <%= link_to "#{@operation.recipient.owner.full_name}", user_account_path(@operation.recipient.owner)%>
+          </td>
+          <td>
+            <%= link_to "Account ##{@operation.recipient_id}", user_account_path(@operation.recipient)%>
+          </td>
+          <td>
+            <%= link_to "#{@operation.currency.name}",currency_path(@operation.currency)%>
+          </td>
+
+          <td><%= @operation.amount %></td>
+          <td><%= @operation.temporal_type %></td>
+          <td><%= @operation.state %></td>
+          <td style="width: 200spx" ><%= @operation.planned_at %></td>
+
+          <td style="text-align: center; display: flex; justify-content: space-around;">
+            <%= link_to 'Edit', edit_operation_path(@operation), class: 'btn btn-warning btn-lg mb-3' %>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+</div>

@@ -5,4 +5,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root to: 'home#index'
+  resources :users
+  resources :currencies
+  resources :operations # , only, only: [:index, :show, :destroy]
+  resources :user_accounts # , only, only: [:index, :show, :destroy]
 end

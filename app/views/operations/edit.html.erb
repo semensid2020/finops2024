@@ -1,0 +1,95 @@
+<div id="form-errors"></div>
+
+<div class="container container-wide">
+<%= link_to 'Back to all operations', operations_path, class: 'btn btn-primary btn-lg mb-3' %>
+<h1 class="mb-4">Edit operation '<%= @operation.id %>'</h1>
+
+<div class="container container-wide">
+<h3 class="mb-4">You only can reschedule operation or switch to immediate</h3>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label" style="width: 145px">
+      Sender (You)
+    </div>
+
+    <div class="col-sm-10  col-form-label">
+      <%= link_to "#{@operation.sender.owner.full_name}", user_account_path(@operation.sender.owner)%>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label" style="width: 145px">
+      Sender account (yours)
+    </div>
+
+    <div class="col-sm-10  col-form-label">
+      <%= link_to "Account ##{@operation.sender_id}", user_account_path(@operation.sender)%>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label" style="width: 145px">
+      Recipient
+    </div>
+
+    <div class="col-sm-10  col-form-label">
+      <%= link_to "Account ##{@operation.recipient_id}", user_account_path(@operation.recipient)%>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label" style="width: 145px">
+      Recipient Account
+    </div>
+
+    <div class="col-sm-10  col-form-label">
+      <%= link_to "Account ##{@operation.sender_id}", user_account_path(@operation.sender)%>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label" style="width: 145px">
+      Аmount
+    </div>
+
+    <div class="col-sm-10">
+      <%= "#{@operation.amount}"%>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label" style="width: 145px">
+      Currency
+    </div>
+
+    <div class="col-sm-10">
+      <%= link_to "#{@operation.currency.name}",currency_path(@operation.currency)%>
+    </div>
+  </div>
+
+
+<%= form_with model: @operation do |f| %>
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label" style="width: 145px">
+      <%= f.label 'Select type'%>
+    </div>
+
+    <div class="col-sm-10" style="display: flex; width: 100px; height: 55px; padding-top: 7px">
+      <%= f.select(:temporal_type, [['immediate', 'immediate'], ['scheduled', 'scheduled']]) %>
+    </div>
+  </div>
+
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label" style="width: 145px" >
+      <%= f.label :planned_at%>
+    </div>
+
+    <div class="col-sm-10">
+      <%= f.datetime_field :planned_at, class: 'form-control', style: "width: 300px"%>
+    </div>
+  </div>
+
+  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+<% end %>
+</div>

@@ -1,0 +1,36 @@
+<div class="container container-wide container-right-alignment">
+  <span>
+    <%= link_to 'New account', new_user_account_path, class: 'btn btn-primary btn-lg mb-3', style: 'text-align: right' %>
+  <span>
+</div>
+<div class="container container-wide">
+<h1 class="mb-4">All accounts</h1>
+  <table class="table table-bordered table-striped mb-0" style="text-align: center">
+      <thead>
+          <tr>
+            <th>ID</th>
+            <th>Owner</th>
+            <th>Currency</th>
+            <th>Balance</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+      </thead>
+
+      <tbody>
+        <% @user_accounts.each do |user_account| %>
+          <tr id="user_account_<%= user_account.id %>">
+            <td><%= user_account.id %></td>
+            <td>
+              <%= link_to "#{user_account.owner.full_name}", user_path(user_account.owner)%>
+              <%= '(You)'if user_account.owner == current_user %>
+            </td>
+            <td>
+              <%= link_to "#{user_account.currency.name}",currency_path(user_account.currency)%>
+            </td>
+            <td><%= (user_account.owner == current_user || current_user.admin_role?) ? user_account.balance : '-' %></td>
+            <td><%= user_account.status %></td>
+        <% end %>
+      </tbody>
+  </table>
+</div>
