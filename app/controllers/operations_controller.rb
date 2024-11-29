@@ -39,6 +39,8 @@ class OperationsController < ApplicationController
     if @operation.save
       flash.now[:success] = 'Financial operation successfully created/scheduled'
 
+      ops_delay = @operation.planned_at.present? ? (@operation.planned_at - Time.zone.now) : 5.seconds
+      OperationExecutionJob.set(wait: ops_delay).perform_later(@operation)
       render turbo_stream: [
         turbo_stream.update('flash-messages', partial: 'shared/flash'),
         turbo_stream.update('form-errors', '')

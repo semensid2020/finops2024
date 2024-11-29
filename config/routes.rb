@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+
   devise_for :users
   get 'home/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -9,4 +11,5 @@ Rails.application.routes.draw do
   resources :currencies
   resources :operations # , only, only: [:index, :show, :destroy]
   resources :user_accounts # , only, only: [:index, :show, :destroy]
+  mount Sidekiq::Web => '/sidekiq'
 end
