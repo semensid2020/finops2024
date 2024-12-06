@@ -1,0 +1,68 @@
+<div id="form-errors"></div>
+
+<%= form_with model: operation do |f| %>
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label" style="width: 75px">
+      <%= f.label :sender_id%>
+    </div>
+
+    <div class="col-sm-10">
+      <%= f.text_field :sender_id, class: 'form-control', style: "width: 300px", required: true%>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label" style="width: 75px">
+      <%= f.label :recipient_id%>
+    </div>
+
+    <div class="col-sm-10">
+      <%= f.text_field :recipient_id, class: 'form-control', style: "width: 300px", required: true%>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label" style="width: 75px">
+      <%= f.label :amount%>
+    </div>
+
+    <div class="col-sm-10">
+      <%= f.text_field :amount, class: 'form-control', style: "width: 300px", required: true%>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label" style="width: 75px">
+      <%= f.label 'Select currency'%>
+    </div>
+
+    <div class="col-sm-10" style="display: flex; width: 100px; height: 55px; padding-top: 7px">
+      <%= select(:operation, :currency_id, options_from_collection_for_select(@currencies, "id", "code", @operation.present? ? @operation.currency_id : nil ), {}, {class: "form-control"}) %>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label" style="width: 75px">
+      <%= f.label 'Select type'%>
+    </div>
+
+    <div class="col-sm-10" style="display: flex; width: 100px; height: 55px; padding-top: 7px">
+      <%= f.select(:temporal_type, [['immediate', 'immediate'], ['scheduled', 'scheduled']]) %>
+    </div>
+  </div>
+
+
+  <div class="mb-3 row">
+    <div class="col-sm-2 col-form-label" style="width: 75px" >
+      <%= f.label :planned_at%>
+    </div>
+
+    <div class="col-sm-10">
+      <%= f.datetime_local_field :planned_at, class: 'form-control', style: "width: 300px"%>
+    </div>
+    <%= f.hidden_field :time_zone, id: 'event_time_zone' %>
+  </div>
+
+
+  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+<% end %>

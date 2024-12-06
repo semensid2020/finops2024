@@ -1,0 +1,65 @@
+<div class="container container-widest container-right-alignment">
+  <span>
+    <%= link_to 'New operation', new_operation_path, class: 'btn btn-primary btn-lg mb-3', style: 'text-align: right' %>
+  <span>
+</div>
+<div class="container container-widest">
+<% if @operations.present? %>
+  <h1 class="mb-4"><%= current_user.admin_role? ? 'All operations in the system' : 'All your operations' %></h1>
+  <table class="table table-bordered table-striped mb-0" style="text-align: center">
+    <thead>
+        <tr>
+          <th>ID</th>
+          <th>Sender</th>
+          <th>Sender Account</th>
+          <th>Recipient</th>
+          <th>Recipient Account</th>
+          <th>Currency</th>
+          <th>Amount</th>
+          <th>Type</th>
+          <th>Planned_at</th>
+          <th>State</th>
+          <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+      <% @operations.each do |operation| %>
+        <tr id="operation_<%= operation.id %>">
+          <td><%= operation.id %></td>
+          <td>
+            <%= link_to "#{operation.sender.owner.full_name}", user_path(operation.sender.owner)%>
+            <br><%= '(You)'if operation.sender.owner == current_user %>
+          </td>
+          <td>
+            <%= link_to "Account ##{operation.sender_id}", user_account_path(operation.sender)%>
+          </td>
+          <td>
+            <%= link_to "#{operation.recipient.owner.full_name}", user_path(operation.recipient.owner)%>
+            <br><%= '(You)'if operation.recipient.owner == current_user %>
+          </td>
+          <td>
+            <%= link_to "Account ##{operation.recipient_id}", user_account_path(operation.recipient)%>
+          </td>
+          <td>
+            <%= link_to "#{operation.currency.name}",currency_path(operation.currency)%>
+          </td>
+
+          <td><%= operation.amount %></td>
+          <td><%= operation.temporal_type %></td>
+          <td style="width: 200spx" ><%= operation.planned_at %></td>
+          <td><%= operation.state %></td>
+
+          <td style="text-align: center; justify-content: space-around;">
+            <%= link_to 'Show', operation_path(operation), class: 'btn btn-success btn-lg mb-3' %>
+                &nbsp;
+            <%= link_to 'Edit', edit_operation_path(operation), class: 'btn btn-warning btn-lg mb-3' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h1 class="mb-4"><%= current_user.admin_role? ? 'No operations so far' : 'You have no operations' %></h1>
+<% end %>
+</div>

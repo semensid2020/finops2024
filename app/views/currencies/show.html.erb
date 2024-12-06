@@ -1,0 +1,21 @@
+<div class="container container-wide">
+<%= link_to 'Back to all currencies', currencies_path, class: 'btn btn-primary btn-lg mb-3' %>
+<h1 class="mb-4">Currency '<%= @currency.name %>'</h1>
+</div>
+<div class="container container-narrow">
+<table class="table table-bordered table-striped mb-0" style="text-align: center">
+      <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Code</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @currency.id %></td>
+          <td><%= @currency.name %></td>
+          <td><%= @currency.code %></td>
+      </tbody>
+  </table>
+</div>

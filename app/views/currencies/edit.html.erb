@@ -1,0 +1,5 @@
+<div class="container container-wide">
+<%= link_to 'Back to all currencies', currencies_path, class: 'btn btn-primary btn-lg mb-3' %>
+<h1 class="mb-4">Edit currency '<%= @currency.name %>'</h1>
+<%= render 'form', currency: @currency %>
+</div>

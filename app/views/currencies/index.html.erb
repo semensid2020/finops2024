@@ -1,0 +1,33 @@
+<div class="container container-wide container-right-alignment">
+  <span>
+    <%= link_to 'New currency', new_currency_path, class: 'btn btn-primary btn-lg mb-3', style: 'text-align: right' %>
+  <span>
+</div>
+<div class="container container-wide">
+<h1 class="mb-4">All currencies</h1>
+  <table class="table table-bordered table-striped mb-0" style="text-align: center">
+      <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Code</th>
+            <th>Actions</th>
+          </tr>
+      </thead>
+
+      <tbody>
+        <% @currencies.each do |currency| %>
+          <tr id="currency_<%= currency.id %>">
+            <td><%= currency.id %></td>
+            <td><%= currency.name %></td>
+            <td><%= currency.code %></td>
+            <td style="text-align: center; display: flex; justify-content: space-around;">
+              <%= link_to 'Show', currency_path(currency), class: 'btn btn-success btn-lg mb-3' %>
+              <%= link_to 'Edit', edit_currency_path(currency), class: 'btn btn-warning btn-lg mb-3' %>
+              <%= link_to 'Delete', currency_path(currency), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                    class: 'btn btn-danger btn-lg mb-3' %>
+            </td>
+        <% end %>
+      </tbody>
+  </table>
+</div>
